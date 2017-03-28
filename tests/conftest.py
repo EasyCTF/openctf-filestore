@@ -8,6 +8,9 @@ def app(request):
     filestore_app.config["TESTING"] = True
     filestore_app.config["UPLOAD_FOLDER"] = "./.data"
 
+    if not os.path.exists(filestore_app.config["UPLOAD_FOLDER"]):
+        os.makedirs(filestore_app.config["UPLOAD_FOLDER"])
+
     ctx = filestore_app.test_request_context()
     ctx.push()
 
