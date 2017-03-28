@@ -6,6 +6,9 @@ from flask import Flask, request
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = "/usr/share/nginx/html"
 
+if not os.path.exists(app.config["UPLOAD_FOLDER"]):
+    os.makedirs(app.config["UPLOAD_FOLDER"])
+
 
 @app.route("/")
 def index():
