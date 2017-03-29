@@ -7,6 +7,15 @@ class TestGeneral(object):
     def test_sanity(self, client):
         assert client.get("/").status_code == 200
 
+    def test_no_file_uploaded(self, client):
+        r = client.post("/save")
+        assert r.status_code == 400
+
+    def test_missing_filename(self, client):
+        file = StringIO("the quick brown fox jumps over the lazy dog")
+        r = client.post("/save", data=dict(file=(file, "")))
+        assert r.status_code == 400
+
     def test_save_prefix(self, client):
         prefix = "hello"
         file = StringIO("the quick brown fox jumps over the lazy dog")
