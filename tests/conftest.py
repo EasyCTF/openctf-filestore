@@ -19,6 +19,7 @@ def app(request):
         ctx.pop()
 
     request.addfinalizer(teardown)
+    return filestore_app
 
 
 @pytest.fixture(scope="session")

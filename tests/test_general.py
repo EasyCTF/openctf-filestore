@@ -1,4 +1,5 @@
 from cStringIO import StringIO
+import os
 
 
 class TestGeneral(object):
@@ -19,3 +20,10 @@ class TestGeneral(object):
         url = client.post(
             "/save", data=dict(file=(file, "hello.txt"), suffix=suffix)).data
         assert url[-len(suffix):] == suffix
+
+    def test_retrieved(self, app, client):
+        data = "the quick brown fox jumps over the lazy dog"
+        file = StringIO(data)
+        url = client.post("/save", data=dict(file=(file, "hello.txt"))).data
+        with open(os.path.join(app.config["UPLOAD_FOLDER"], url), "r") as f:
+            assert f.read() == data
