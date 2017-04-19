@@ -1,4 +1,5 @@
 import hashlib
+import json
 import os
 
 from flask import Flask, request
@@ -25,7 +26,7 @@ def save():
     filename = hashlib.sha256(file.read()).hexdigest()
     file.seek(0)
     if "filename" in request.form:
-        name, ext = request.form["filename"]
+        name, ext = json.loads(request.form["filename"])
         filename = "%s.%s.%s" % (name, filename, ext)
     else:
         if "prefix" in request.form:
