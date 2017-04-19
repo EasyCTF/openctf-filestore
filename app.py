@@ -4,7 +4,7 @@ import os
 from flask import Flask, request
 
 app = Flask(__name__)
-app.config["UPLOAD_FOLDER"] = "/usr/share/nginx/html"
+app.config["UPLOAD_FOLDER"] = os.getenv("UPLOAD_FOLDER", "/usr/share/nginx/html")
 
 
 @app.route("/")
