@@ -24,10 +24,14 @@ def save():
         return "no filename found", 400
     filename = hashlib.sha256(file.read()).hexdigest()
     file.seek(0)
-    if "prefix" in request.form:
-        filename = "%s_%s" % (request.form["prefix"], filename)
-    if "suffix" in request.form:
-        filename = "%s_%s" % (filename, request.form["suffix"])
+    if "filename" in request.form:
+        name, ext = request.form["filename"]
+        filename = "%s.%s.%s" % (name, filename, ext)
+    else:
+        if "prefix" in request.form:
+            filename = "%s_%s" % (request.form["prefix"], filename)
+        if "suffix" in request.form:
+            filename = "%s_%s" % (filename, request.form["suffix"])
     file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
     return filename
 
