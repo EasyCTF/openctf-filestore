@@ -6,10 +6,13 @@ from flask import Flask, request
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = os.getenv("UPLOAD_FOLDER", "/usr/share/nginx/html")
 
+if not os.path.exists(app.config["UPLOAD_FOLDER"]):
+    os.makedirs(app.config["UPLOAD_FOLDER"])
+
 
 @app.route("/")
 def index():
-    return "Hello."
+    return "You shouldn't be here."
 
 
 @app.route("/save", methods=["POST"])
@@ -30,4 +33,5 @@ def save():
 
 
 if __name__ == "__main__":
-    app.run(use_debugger=True, use_reloader=True, port=8000, host="0.0.0.0")
+    port = int(os.getenv("PORT", "8000"))
+    app.run(use_debugger=True, use_reloader=True, port=port, host="0.0.0.0")
