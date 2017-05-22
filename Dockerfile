@@ -14,3 +14,5 @@ RUN pip install -r requirements.txt
 EXPOSE 80
 EXPOSE 8000
 RUN service nginx start
+
+ENTRYPOINT ["/app/start.sh"]
