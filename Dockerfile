@@ -15,4 +15,5 @@ EXPOSE 80
 EXPOSE 8000
 RUN service nginx start
 
+RUN chmod +x /app/start.sh
 ENTRYPOINT ["/app/start.sh"]
