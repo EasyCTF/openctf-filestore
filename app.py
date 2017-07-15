@@ -2,7 +2,7 @@ import hashlib
 import json
 import os
 
-from flask import Flask, request
+from flask import Flask, request, send_file
 
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = os.getenv("UPLOAD_FOLDER", "/usr/share/nginx/html")
@@ -35,6 +35,13 @@ def save():
             filename = "%s_%s" % (filename, request.form["suffix"])
     file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
     return filename
+
+
+# This route should be used for debugging filestore locally.
+
+@app.route("/static/<string:path>")
+def serve(path):
+    return send_file(os.path.join(app.config["UPLOAD_FOLDER"], path))
 
 
 if __name__ == "__main__":
