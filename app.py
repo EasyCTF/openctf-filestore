@@ -38,5 +38,5 @@ def save():
 
 
 if __name__ == "__main__":
-    port = int(os.getenv("PORT", "8000"))
+    port = int(os.getenv("FILESTORE_PORT", "7910"))
     app.run(use_debugger=True, use_reloader=True, port=port, host="0.0.0.0")
