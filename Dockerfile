@@ -12,7 +12,7 @@ WORKDIR /app
 RUN pip install -r requirements.txt
 
 EXPOSE 80
-EXPOSE 8000
+EXPOSE 7910
 RUN service nginx start
 
 RUN chmod +x /app/start.sh

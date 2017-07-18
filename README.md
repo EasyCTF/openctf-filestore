@@ -1,7 +1,7 @@
 OpenCTF // Filestore
 ====================
 
-This is a static file server, responsible for serving not only web assets, but also user avatars and challenge-related files (autogen included). It runs a Flask app on port 8000, listening internally from the main web application for uploads, and then serves the files using an Nginx server that is proxied from the main server.
+This is a static file server, responsible for serving not only web assets, but also user avatars and challenge-related files (autogen included). It runs a Flask app on port 7910, listening internally from the main web application for uploads, and then serves the files using an Nginx server that is proxied from the main server.
 
 To run Filestore, just run `app.py` with Python 3. It will start the Filestore server on port 7910. If you are debugging OpenCTF locally without Nginx, you can also use `/static/<path>` to retrieve saved files.
 
